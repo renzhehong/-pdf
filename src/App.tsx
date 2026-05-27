@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PDFPane from "./components/PDFPane";
 import EditorPane from "./components/EditorPane";
 import { Anchor, PDFPosition } from "./types";
@@ -26,14 +26,18 @@ export default function App() {
     }
   };
 
-  const addAnchor = (id: string) => {
-    const newAnchor: Anchor = { id, positions: [], bound: false };
-    setAnchors((prev) => [...prev, newAnchor]);
-    // Auto-enter pending binding mode for this new anchor
-    setPendingAnchor(id);
-    setActiveAnchor(id);
-    setActivePositionId(null);
-  };
+  const addAnchor = useCallback((id: string, autoBind = true) => {
+    setAnchors((prev) => {
+      if (prev.some((a) => a.id === id)) return prev;
+      return [...prev, { id, positions: [], bound: false }];
+    });
+    if (autoBind) {
+      // Auto-enter pending binding mode for this new anchor
+      setPendingAnchor(id);
+      setActiveAnchor(id);
+      setActivePositionId(null);
+    }
+  }, []);
 
   const bindAnchor = (page: number, x: number, y: number) => {
     if (!pendingAnchor) return;
@@ -60,8 +64,11 @@ export default function App() {
   };
 
   const handleAnchorClickInEditor = (id: string) => {
-    const anchor = anchors.find((a) => a.id === id);
-    if (!anchor) return;
+    let anchor = anchors.find((a) => a.id === id);
+    if (!anchor) {
+      addAnchor(id, true);
+      return;
+    }
 
     if (activeAnchor === id) {
       // If it is already active, cycle through its bound positions sequentially

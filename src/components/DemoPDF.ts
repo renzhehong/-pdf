@@ -1,4 +1,71 @@
-// A 100% compliant, lightweight single-page PDF encoded in Base64
-// This allows the user to play with PDF Anchor Notes instantly without local file uploads.
-export const DEMO_PDF_BASE64 =
-  "JVBERi0xLjQKMSAwIG9iago8PAogIC9UeXBlIC9DYXRhbG9nCiAgL1BhZ2VzIDIgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2VzCiAgL0tpZHMgWzMgMCBSXQogIC9Db3VudCAxCj4+CmVuZG9iagozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKIC9QYXJlbnQgMiAwIFIKICAvTWVkaWFCb3ggWzAgMCA1OTUuMjggODQxLjg5XQogIC9SZXNvdXJjZXMgPDwKICAgIC9Gb250IDw8CiAgICAgIC9GMSA0IDAgUgogICAgPj4KICA+PgogIC9Db250ZW50cyA1IDAgUgo+PgplbmRvYmoKNCAwIG9iago8PAogIC9UeXBlIC9Gb250CiAgL1N1YnR5cGUgL1R5cGUxCiAgL0Jhc2VGb250IC9IZWx2ZXRpY2EKLz4+CmVuZG9iago1IDAgb2JqCjw8IC9MZW5ndGggMzcwID4+CnN0cmVhbQpCVAovRjEgMjQgVGYKNzAgNzMwIFRkCihQREYgQW5jaG9yIE5vdGVzIC0gRW50ZXJwcmlzZSBEZW1vKSBUagpFVApCVAovRjEgMTIgVGYKNzAgNjcwIFRkCihUaGlzIGlzIGEgbGlnaHR3ZWlnaHQgZGVtbyBkb2N1bWVudCBnZW5lcmF0ZWQgaW5saW5lIHRvIGhlbHAgeW91IGdldCBzdGFydGVkLikgVGoKRVQKQlQKL0YxIDE0IFRmCjcwIDYwMCBUZAooMS4gT24gdGhlIHJpZ2h0LCB0eXBlIHlvdXIgYXV0aG9yaW5nIG5vdGVzIGluIHRoZSBXb3JkLWxpa2UgZWRpdG9yLikgVGoKRVQKQlQKL0YxIDE0IFRmCjcwIDU3MCBUZAooMi4gQ2xpY2sgdGhlICJJbnNlcnQgQW5jaG9yIiBidXR0b24gdG8gcGxhY2UgYSBuZXcgbWFya2VyIGluIHlvdXIgdGV4dC4pIFRqCkVpCg==BTCi9GMSAxNCBUZgo3MCA1NDAgVGQKKDMuIENsaWNrIGFueXdoZXJlIG9uIHRoaXMgbGVmdCBQREYgcGFnZSB0byBhbmNob3IgdGhlIHBlbmRpbmcgbWFya2VyLikgVGoKRVQKQlQKL0YxIDE0IFRmCjcwIDUxMCBUZAooNC4gQ2xpY2sgdGhlIGFuY2hvciBpbiB0aGUgZWRpdG9yIHRvIHNjcm9sbCBoZXJlIGF1dG9tYXRpY2FsbHkhKSBUagpFVApCVAovRjEgMTIgVGYKNzAgNDQwIFRkCihZb3UgY2FuIGFsc28gdXBsb2FkIHlvdXIgb3duIGxvY2FsIFBERnMgdXNpbmcgdGhlICJVcGxvYWQgUERGIiBidXR0b24gYWJvdmUuKSBUagpFVAplbmRzdHJlYW0KZW5kb2JqeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDE1IDAwMDAwIG4gCjAwMDAwMDAwNjggMDAwMDAgbiAKMDAwMDAwMDEyMSAwMDAwMCBuIAowMDAwMDAwMjQ5IDAwMDAwIG4gCjAwMDAwMDAzMTggMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKIC9Sb290IDEgMCBSCj4+CnN0YXJ0eHJlZgowODAKJSVFT0Y=";
+// A 100% compliant, lightweight single-page PDF dynamically encoded in Base64 at compile/load time.
+// This preserves ASCII compliance and guarantees no invalid character or padding sequences are fed to atob.
+
+const PDF_SOURCE = `%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 500 >>
+stream
+BT
+/F1 20 Tf
+70 750 Td
+(PDF Multi-Pin Annotation Linker - Demo Page) Tj
+ET
+BT
+/F1 12 Tf
+70 700 Td
+(This lightweight demo document is generated inline to help you get started.) Tj
+ET
+BT
+/F1 12 Tf
+70 650 Td
+(Instructions for Multi-Point Positioning:) Tj
+ET
+BT
+/F1 11 Tf
+70 620 Td
+(- Click any tag on the right pane [e.g. "model architecture" or "experiment"].) Tj
+ET
+BT
+/F1 11 Tf
+70 590 Td
+(- Enter "Append Position" mode, then click on multiple spots on this page to pin them.) Tj
+ET
+BT
+/F1 11 Tf
+70 560 Td
+(- Click the numbers on these pins on either the PDF or the editor to sync and navigate.) Tj
+ET
+BT
+/F1 12 Tf
+70 480 Td
+(Tip: Click "Upload PDF" in the header to view and annotate your own documents.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000074 00000 n 
+0000000120 00000 n 
+0000000271 00000 n 
+0000000350 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+750
+%%EOF`;
+
+export const DEMO_PDF_BASE64 = btoa(PDF_SOURCE);

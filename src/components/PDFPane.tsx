@@ -199,12 +199,12 @@ export default function PDFPane({
                     key={`pdf-pin-${pos.id}`}
                     id={`pdf-pos-${pos.id}`}
                     className={cn(
-                      "absolute w-6 h-6 -ml-3 -mt-3 rounded-full flex items-center justify-center text-[10px] font-black shadow-md transition-all z-20 cursor-pointer select-none border border-white",
+                      "absolute w-4 h-4 -ml-2 -mt-2 rounded flex items-center justify-center text-[9px] font-black shadow-sm transition-all z-20 cursor-pointer select-none border border-white",
                       isSelected
-                        ? "bg-blue-600 text-white ring-4 ring-blue-500/40 ring-offset-2 scale-125 z-30 font-bold"
+                        ? "bg-blue-600 text-white ring-2 ring-blue-500/40 ring-offset-1 scale-115 z-30 font-bold"
                         : isHostSelected
-                          ? "bg-blue-500 text-white ring-2 ring-blue-300 scale-110 z-20"
-                          : "bg-emerald-500 hover:bg-emerald-600 text-white hover:scale-115 z-10",
+                          ? "bg-blue-500 text-white ring-1 ring-blue-300 scale-105 z-20"
+                          : "bg-emerald-500 hover:bg-emerald-600 text-white z-10",
                     )}
                     style={{
                       left: `${pos.x}%`,

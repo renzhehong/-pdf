@@ -27,3 +27,23 @@
 :root {
   color-scheme: light !important;
 }
+
+@keyframes anchor-flash {
+  0% {
+    background-color: #fef08a !important; /* bg-yellow-200 */
+    box-shadow: 0 0 0 8px rgba(234, 179, 8, 0.5);
+    transform: scale(1.15);
+  }
+  35% {
+    background-color: #fef08a !important;
+    box-shadow: 0 0 0 8px rgba(234, 179, 8, 0.5);
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-anchor-flash {
+  animation: anchor-flash 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
