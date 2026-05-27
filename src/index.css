@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* 强制 PDF 容器和页面在任何系统主题下都保持白底，防止部分浏览器强制暗黑模式或透明 Canvas 导致的黑屏现象 */
+.react-pdf__Page {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  color-scheme: light !important;
+}
+
+.react-pdf__Page__canvas {
+  background-color: #ffffff !important;
+  color-scheme: light !important;
+  /* 防止部分浏览器/系统对 Canvas 进行反色渲染 */
+  filter: none !important;
+}
+
+.react-pdf__Page__textContent {
+  color: #000000 !important;
+  color-scheme: light !important;
+}
+
+.react-pdf__Document {
+  color-scheme: light !important;
+}
+
+/* 提高编辑器和PDF渲染等整体的样式稳健性 */
+:root {
+  color-scheme: light !important;
+}
